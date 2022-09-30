@@ -71,12 +71,6 @@ class StudentExam():
 class Quiz(Exam):
     """List Questions"""
 
-    questions = []
-
-    def add_question(self, question_to_add):
-        Quiz.questions.append(question_to_add)
-
-
     def administer():
         """ Iterates through question list and counts correct answers """
 
@@ -98,7 +92,6 @@ class Quiz(Exam):
 
 
 class StudentQuiz(StudentExam):
-        
 
     def take_test():
         """Administers exam and assigns score to StudentExam instance"""
@@ -108,10 +101,10 @@ class StudentQuiz(StudentExam):
 
 ###################################################################################
 
-def exam_example():
+def example():
    
     # Creates an exam:
-    exam = Exam("Midterm")
+    exam = Quiz("Midterm")
 
     # Defines a few questions for the exam:
     list_q = Question('Python lists are mutable, iterable, and what?','ordered')
@@ -129,46 +122,10 @@ def exam_example():
 
 
     # Administers the test for that student using the take_test method you wrote:
-    score = StudentExam.take_test()
-
-    # Instantiates a StudentExam, passing the student and exam you just created as arguments:
-    student_and_exam = StudentExam(student_1, exam, score)
-
-    
-   
-exam_example()
-
-######################## ADDED FOR PT 4 ##########################################
-
-def quiz_example():
-   
-    # Creates an exam:
-    quiz = Quiz("Midterm")
-
-    # Defines a few questions for the exam:
-    list_q = Question('Python lists are mutable, iterable, and what?','ordered')
-    set_q = Question('What is the method for adding an element to a set?', '.add()')
-    pwd_q = Question('What does pwd stand for?','print working directory')
-
-    # Adds a few questions to the quiz:
-    quiz.add_question(set_q)
-    quiz.add_question(pwd_q)
-    quiz.add_question(list_q)
-
-
-    # Creates a student:
-    student_1 = Student("Jasmine", "Debugger", "0101 Computer Street")
-    # student_2 = Student("Jacqui", "Console", "888 Binary Ave")
-
-
-    # Administers the test for that student using the take_test method you wrote:
     score = StudentQuiz.take_test()
 
     # Instantiates a StudentExam, passing the student and exam you just created as arguments:
-    student_and_exam = StudentQuiz(student_1, quiz, score)
-
-quiz_example()
-
-###################################################################################
-
-# Check oo_2.py for less DRY-ness :) 
+    student_and_exam = StudentQuiz(student_1, exam, score)
+    
+   
+example()
