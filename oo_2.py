@@ -37,7 +37,7 @@ class Exam():
         Exam.questions.append(question_to_add)
 
 
-    def administer():
+    def administer(self):
         """ Iterates through question list and counts correct answers """
 
         count = 0
@@ -61,11 +61,11 @@ class StudentExam():
         self.student_score = student_score
         
 
-    def take_test():
+    def take_test(self):
         """Administers exam and assigns score to StudentExam instance"""
 
         student_score = Exam.administer()
-        print(f"Score: {student_score}") 
+        print(f"{self.first_name} got a {student_score} on the exam") 
 
 ######################## ADDED FOR PT 4 ##########################################
 class Quiz(Exam):
@@ -93,11 +93,11 @@ class Quiz(Exam):
 
 class StudentQuiz(StudentExam):
 
-    def take_test():
+    def take_test(self):
         """Administers exam and assigns score to StudentExam instance"""
 
         student_score = Quiz.administer()
-        print(f"{student_score}") 
+        print(f"{self.first_name} got a {student_score} on the quiz") 
 
 ###################################################################################
 
@@ -117,12 +117,12 @@ def example():
     exam.add_question(list_q)
 
     # Creates a student:
-    student_1 = Student("Jasmine", "Debugger", "0101 Computer Street")
+    student_1 = Student("Karen", "Debugger", "0101 Computer Street")
     # student_2 = Student("Jacqui", "Console", "888 Binary Ave")
 
 
     # Administers the test for that student using the take_test method you wrote:
-    score = StudentQuiz.take_test()
+    score = StudentQuiz.take_test(student_1)
 
     # Instantiates a StudentExam, passing the student and exam you just created as arguments:
     student_and_exam = StudentQuiz(student_1, exam, score)

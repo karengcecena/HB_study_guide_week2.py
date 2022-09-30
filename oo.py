@@ -1,3 +1,5 @@
+# Check oo_2.py for less DRY-ness :) and better code
+
 # Create your classes here
 
 class Student():
@@ -171,4 +173,4 @@ quiz_example()
 
 ###################################################################################
 
-# Check oo_2.py for less DRY-ness :) 
+# Check oo_2.py for less DRY-ness :) and better code
