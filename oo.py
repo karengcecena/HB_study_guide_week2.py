@@ -67,9 +67,48 @@ class StudentExam():
         student_score = Exam.administer()
         print(f"Score: {student_score}") 
 
+######################## ADDED FOR PT 4 ##########################################
+class Quiz(Exam):
+    """List Questions"""
+
+    questions = []
+
+    def add_question(self, question_to_add):
+        Quiz.questions.append(question_to_add)
 
 
-def example():
+    def administer():
+        """ Iterates through question list and counts correct answers """
+
+        count = 0
+        total = 0
+
+        for question in Exam.questions:
+
+            total += 1
+
+            if question.ask_and_evaluate() == True:
+                count += 1
+
+        if count / total >= 0.5:
+            return 1
+        
+        else:
+            return 0
+
+
+class StudentQuiz(StudentExam):
+        
+
+    def take_test():
+        """Administers exam and assigns score to StudentExam instance"""
+
+        student_score = Quiz.administer()
+        print(f"{student_score}") 
+
+###################################################################################
+
+def exam_example():
    
     # Creates an exam:
     exam = Exam("Midterm")
@@ -84,7 +123,6 @@ def example():
     exam.add_question(pwd_q)
     exam.add_question(list_q)
 
-
     # Creates a student:
     student_1 = Student("Jasmine", "Debugger", "0101 Computer Street")
     # student_2 = Student("Jacqui", "Console", "888 Binary Ave")
@@ -98,27 +136,37 @@ def example():
 
     
    
-example()
+exam_example()
 
-    # Part 4:
+######################## ADDED FOR PT 4 ##########################################
+
+def quiz_example():
    
-"""
-    When you call the administer method on a quiz, it should return 1 if you passed or 0 if you failed.
-    Think about how you could solve this requirement: you have an Exam class and you want to have a Quiz class that is similar.
+    # Creates an exam:
+    quiz = Quiz("Midterm")
 
-    As you saw in Part 4 with StudentExam, you will also need a new class, StudentQuiz, that allows a student to take a quiz and stores the score received.
+    # Defines a few questions for the exam:
+    list_q = Question('Python lists are mutable, iterable, and what?','ordered')
+    set_q = Question('What is the method for adding an element to a set?', '.add()')
+    pwd_q = Question('What does pwd stand for?','print working directory')
 
-    Write code to solve this problem. Incorporate as many of the “design” parts of the classes lectures as you feel comfortable with.
-    """
-
-### Removed Code:
-    # From Exam def __init__
-        # exams = {"midterm" : [], "final" : []}
-        # midterm = []
-        # final = []
+    # Adds a few questions to the quiz:
+    quiz.add_question(set_q)
+    quiz.add_question(pwd_q)
+    quiz.add_question(list_q)
 
 
-        # alberta_capital = Question("What is the capital of Alberta?", "Edmonton", "Midterm")
-        # python_author = Question("Who is the author of Python?", "Guido Van Rossum", "Midterm")
-        # ubermelon_competitor = Question("", "", "Final")
-        # balloonicorn_color = Question("", "", "Final")
+    # Creates a student:
+    student_1 = Student("Jasmine", "Debugger", "0101 Computer Street")
+    # student_2 = Student("Jacqui", "Console", "888 Binary Ave")
+
+
+    # Administers the test for that student using the take_test method you wrote:
+    score = StudentQuiz.take_test()
+
+    # Instantiates a StudentExam, passing the student and exam you just created as arguments:
+    student_and_exam = StudentQuiz(student_1, quiz, score)
+
+quiz_example()
+
+###################################################################################
